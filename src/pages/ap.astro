@@ -1,0 +1,26 @@
+---
+import AssetCard from "@/components/AssetCard.astro";
+import Layout from "@/layouts/Main.astro";
+import { ASSET_URL, type Asset } from "@/lib/asset";
+import { LayoutGrid, PlusCircle } from "lucide-astro";
+export const prerender = false;
+const apps: Asset[] = await (await fetch(`${ASSET_URL}/json/apps.json`)).json();
+const customApps = (Astro.cookies.get("asset.app")?.json() as Asset[]) ?? [];
+---
+
+<Layout>
+  <div class="flex justify-center py-8 flex-col items-center gap-4">
+    <div class="text-4xl font-bold text-text inline-flex">
+      <LayoutGrid class="size-12 mr-2" />
+      Apps
+    </div>
+    <button class="p-4 bg-interactive hover:bg-interactive-secondary rounded-md font-semibold inline-flex items-center" data-type="app" id="add-asset">
+      <PlusCircle class="size-5 mr-2" />
+      Add App
+    </button>
+    <div class="flex flex-wrap justify-center gap-4 flex-row mt-30">
+      {[...customApps, ...apps].sort((a, b) => (a.name > b.name ? 1 : -1)).map((app) => <AssetCard asset={app} />)}
+    </div>
+  </div>
+</Layout>
+<script src="@/lib/asset-script.ts"></script>

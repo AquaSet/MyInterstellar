@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+   :root {
+      /* --background-image: url("/assets/media/backgrounds/full-inverted.png"); */
+      --background: #111;
+      --background-secondary: #222;
+      --interactive: #333;
+      --interactive-secondary: #777;
+      --border: #444;
+      --accent: #444;
+      --text: #fff;
+      --text-secondary: #ddd;
+   }
+}
+
+@layer base {
+   body {
+      @apply h-full font-sans bg-background text-text;
+   }
+
+   * {
+      @apply border-border;
+   }
+}
+
+::-webkit-scrollbar {
+   width: 6px;
+   background-color: var(--background-secondary);
+}
+
+::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+   border-radius: 10px;
+   background-color: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+   border-radius: 10px;
+   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+   background-color: var(--text);
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background-color: var(--text-secondary);
+}

@@ -1,0 +1,33 @@
+---
+import Obfuscated from "@/components/Obfuscated.astro";
+import { AppWindow, Gamepad2, LayoutGrid, Settings2, Wrench } from "lucide-astro";
+import Layout from "./Layout.astro";
+const navLinks = [
+  { href: "/ap", text: "Apps", Icon: LayoutGrid },
+  { href: "/ga", text: "Games", Icon: Gamepad2 },
+  { href: "/to", text: "Tools", Icon: Wrench },
+  { href: "/tb", text: "Tabs", Icon: AppWindow },
+  { href: "/st", text: "Settings", Icon: Settings2 },
+];
+---
+
+<Layout>
+  <nav class="flex flex-row justify-between backdrop-blur-lg bg-secondary border-none w-[98vw] h-20 px-6 rounded-xl mx-4 mt-4 fixed top-0">
+    <a href="/" class="uppercase flex items-center hover:-translate-y-1 hover:scale-105 duration-150 text-6xl font-black">in</a>
+    <ul class="flex flex-row items-center text-2xl gap-6 font-semibold">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="flex-row inline-flex gap-2 items-center hover:scale-105 hover:-translate-y-1 duration-150">
+              <link.Icon class="size-5" />
+              <Obfuscated text={link.text} class={Astro.url.pathname.startsWith(link.href) ? "underline" : ""} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <main class="mt-24">
+    <slot />
+  </main>
+</Layout>
